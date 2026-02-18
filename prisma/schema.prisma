@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Book {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  name      String
+  snapshots OddsSnapshot[]
+}
+
+model Event {
+  id            String   @id @default(cuid())
+  canonicalId   String   @unique
+  league        String
+  sport         String
+  homeTeam      String
+  awayTeam      String
+  commenceTime  DateTime
+  markets       Market[]
+}
+
+model Market {
+  id            String   @id @default(cuid())
+  eventId       String
+  event         Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  marketType    String
+  line          Float?
+  selection     String
+  canonicalKey  String   @unique
+  snapshots     OddsSnapshot[]
+}
+
+model OddsSnapshot {
+  id            String   @id @default(cuid())
+  bookId        String
+  marketId      String
+  snapshotTime  DateTime
+  americanOdds  Int
+  decimalOdds   Float
+  impliedProb   Float
+
+  book          Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  market        Market   @relation(fields: [marketId], references: [id], onDelete: Cascade)
+
+  @@index([snapshotTime])
+  @@unique([bookId, marketId, snapshotTime])
+}

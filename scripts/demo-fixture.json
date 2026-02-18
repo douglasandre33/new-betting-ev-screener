@@ -1,0 +1,14 @@
+[
+  {
+    "id": "evt_1",
+    "sport_key": "basketball_nba",
+    "sport_title": "NBA",
+    "commence_time": "2026-02-18T08:00:00Z",
+    "home_team": "Boston Celtics",
+    "away_team": "Denver Nuggets",
+    "bookmakers": [
+      {"key": "pinnacle", "title": "Pinnacle", "markets": [{"key": "h2h", "outcomes": [{"name": "Boston Celtics", "price": -110}, {"name": "Denver Nuggets", "price": -110}]}]},
+      {"key": "fanduel", "title": "FanDuel", "markets": [{"key": "h2h", "outcomes": [{"name": "Boston Celtics", "price": -102}, {"name": "Denver Nuggets", "price": -118}]}]}
+    ]
+  }
+]
